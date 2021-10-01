@@ -17,3 +17,22 @@ $yellow: #ffed4a;
 $green: #38c172;
 $teal: #4dc0b5;
 $cyan: #6cb2eb;
+
+/**
+ * -Variables propias
+**/
+$primary: #123C5D;
+$secondary: #45B1E1;
+$white: #fff;
+
+/**
+ * -Clases css genericas para todo el proyecto
+**/
+
+.text-primary{
+    color: $primary;
+}
+
+.text-secondary{
+    color: $secondary;
+}

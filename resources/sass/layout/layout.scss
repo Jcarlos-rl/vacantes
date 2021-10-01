@@ -1,0 +1,9 @@
+nav{
+    background-color: $primary;
+    a{
+        color: $white;
+    }
+    a:hover{
+        color: $secondary;
+    }
+}
