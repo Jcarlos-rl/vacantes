@@ -1,6 +1,8 @@
 <?php
 
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +16,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $categories = Category::all();
+    return view('welcome', compact('categories'));
 });
 
 Auth::routes(['verify' => true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/admin/categories', [CategoryController::class, 'index'])->name('categories.index');

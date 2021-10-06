@@ -10035,3 +10035,25 @@ nav a:hover {
 input.form-control {
   border: 1px solid #45B1E1;
 }
+
+a {
+  text-decoration: none !important;
+}
+
+/**
+ * -Estilos pagina welcome
+**/
+.category_label {
+  background-color: #F2F6F7;
+  padding: 5px 15px;
+  margin-right: 10px;
+  border-radius: 15px;
+  color: #123C5D;
+}
+
+.container_vacancy {
+  background-color: #123C5D;
+  height: 100%;
+  padding: 20px 30px;
+  border-radius: 5px;
+}
