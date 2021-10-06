@@ -10030,8 +10030,8 @@ nav a:hover {
 }
 
 /**
- * -Estilos page auth/register.blade.php
+ * -Estilos geberales
 **/
-.register-form input {
+input.form-control {
   border: 1px solid #45B1E1;
 }
