@@ -44,9 +44,16 @@ class VacancyController extends Controller
      * @param  \App\Models\Vacancy  $vacancy
      * @return \Illuminate\Http\Response
      */
-    public function show(Vacancy $vacancy)
+    public function show(Vacancy $vacancy, $slug)
     {
-        //
+        $vacante = Vacancy::where('slug', $slug)->first();
+
+        if($vacante == null){
+            return abort(404);
+        }else{
+            return view('vacantes.show', compact('vacante'));
+        }
+
     }
 
     /**

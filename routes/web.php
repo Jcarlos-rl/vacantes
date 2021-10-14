@@ -2,6 +2,7 @@
 
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\VacancyController;
 use App\Http\Controllers\CategoryController;
 
 /*
@@ -22,6 +23,6 @@ Route::get('/', function () {
 
 Auth::routes(['verify' => true]);
 
+/* ----- ----- ----- Vistas generales del proyecto ----- ----- ----- */
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Route::get('/admin/categories', [CategoryController::class, 'index'])->name('categories.index');
+Route::get('/vacantes/{slug}', [VacancyController::class, 'show'])->name('vacante.show');

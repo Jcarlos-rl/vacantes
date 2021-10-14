@@ -39,7 +39,7 @@ class VacancySeeder extends Seeder
         ]);
         DB::table('vacancies')->insert([
             'name' => 'Vacante num 2',
-            'slug' => Str::slug('Vacante num 1'),
+            'slug' => Str::slug('Vacante num 2'),
             'folio' => '1312562',
             'descripcion' => 'Consequat ipsum reprehenderit fugiat eiusmod fugiat excepteur excepteur enim nostrud reprehenderit sint labore in. Reprehenderit eu sunt laboris sint aliquip. Lorem sint qui est reprehenderit qui nisi.',
             'acta' => 0,
@@ -60,7 +60,7 @@ class VacancySeeder extends Seeder
         ]);
         DB::table('vacancies')->insert([
             'name' => 'Vacante num 3',
-            'slug' => Str::slug('Vacante num 1'),
+            'slug' => Str::slug('Vacante num 3'),
             'folio' => '1312563',
             'descripcion' => 'Consequat ipsum reprehenderit fugiat eiusmod fugiat excepteur excepteur enim nostrud reprehenderit sint labore in. Reprehenderit eu sunt laboris sint aliquip. Lorem sint qui est reprehenderit qui nisi.',
             'acta' => 0,
@@ -81,7 +81,7 @@ class VacancySeeder extends Seeder
         ]);
         DB::table('vacancies')->insert([
             'name' => 'Vacante num 4',
-            'slug' => Str::slug('Vacante num 1'),
+            'slug' => Str::slug('Vacante num 4'),
             'folio' => '1312564',
             'descripcion' => 'Consequat ipsum reprehenderit fugiat eiusmod fugiat excepteur excepteur enim nostrud reprehenderit sint labore in. Reprehenderit eu sunt laboris sint aliquip. Lorem sint qui est reprehenderit qui nisi.',
             'acta' => 0,

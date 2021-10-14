@@ -22,7 +22,7 @@
                         <div class="container_vacancy">
                             <span class="text-white">BUAP</span>
                             <p class="text-white">{{ $vacante->name }}</p>
-                            <button class="btn btn-secondary text-white">Aplicar</button>
+                            <a href="{{ route('vacante.show', $vacante->slug) }}" class="btn btn-secondary text-white">Aplicar</a>
                         </div>
                     </div>
                 @endforeach
