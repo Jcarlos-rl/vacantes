@@ -15,7 +15,6 @@ class CreateVacanciesTable extends Migration
     {
         Schema::create('vacancies', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->string('name');
             $table->string('slug');
             $table->string('folio');
@@ -33,6 +32,7 @@ class CreateVacanciesTable extends Migration
             $table->boolean('licencia_manejo')->default(0);
             $table->boolean('comprobante_domicilio')->default(0);
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
+            $table->timestamps();
         });
     }
 

@@ -30,7 +30,7 @@ class Vacancy extends Model
     ];
 
     //Relación de 1:1
-    public function categoria()
+    public function category()
     {
         return $this->belongsTo(Category::class);
     }

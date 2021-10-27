@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Vacancy;
+use App\Models\Document;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class VacancyController extends Controller
 {
@@ -88,5 +90,42 @@ class VacancyController extends Controller
     public function destroy(Vacancy $vacancy)
     {
         //
+    }
+
+    public function files(Request $request)
+    {
+        $file = $request->file('file');
+        $nameFile = $request->type.'_'.time().'.'.$file->extension();
+        $fileDB = $this->saveFilesDB(['name' => $nameFile, 'type' => $request->type]);
+
+        $file->move(public_path('storage/documents/'.$fileDB['user_id']), $nameFile);
+        return response()->json([
+            'status' => 200,
+            'data' => $fileDB
+        ]);
+    }
+
+    private function saveFilesDB($data)
+    {
+        return auth()->user()->documentos()->create([
+            'name' => $data['name'],
+            'type' => $data['type']
+        ]);
+    }
+
+    public function getFileUser(Request $request){
+        $file = Document::where('type', $request->type)->where('user_id', $request->id)->get();
+        return $file;
+    }
+
+    public function deleteFile(Document $document){
+
+        if(File::exists('storage/documents/'.auth()->user()->id.'/'.$document->name)){
+            File::delete('storage/documents/'.auth()->user()->id.'/'.$document->name);
+        }
+
+        $document->delete();
+
+        return response('Documento Eliminado', 200);
     }
 }
