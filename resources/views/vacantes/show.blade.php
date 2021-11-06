@@ -111,85 +111,102 @@
                 Lo sentimos, para postularte a la vacante necesita <a class="text-secondary" href="{{ route('login') }}"">Inicar sesión</a> ó <a class="text-secondary" href="{{ route('register') }}">Registrarse</a> en la plataforma.
             </div>
         @else
-            <div class="row">
-                <input id="id_user" type="hidden" value="{{ auth()->user()->id }}">
-                <h4 class="text-primary my-4 col-lg-12">Adjuntar documentación solicitada:</h4>
-                @if ($vacante->acta == 1)
-                    <div class="col-12 col-lg-6 mt-3">
-                        <h5 class="text-primary">Acta de nacimiento</h5>
-                        <div id="acta" class="dropzone text-center"></div>
+            @if(Auth::user()->email_verified_at != null)
+                <div class="row">
+                    <input id="id_user" type="hidden" value="{{ auth()->user()->id }}">
+                    <h4 class="text-primary my-4 col-lg-12">Adjuntar documentación solicitada:</h4>
+                    @if ($vacante->acta == 1)
+                        <div class="col-12 col-lg-6 mt-3">
+                            <h5 class="text-primary">Acta de nacimiento</h5>
+                            <div id="acta" class="dropzone text-center"></div>
+                        </div>
+                    @endif
+                    @if ($vacante->ine == 1)
+                        <div class="col-12 col-lg-6 mt-3">
+                            <h5 class="text-primary">Identificación oficial</h5>
+                            <div id="ine" class="dropzone text-center"></div>
+                        </div>
+                    @endif
+                    @if ($vacante->cv == 1)
+                        <div class="col-12 col-lg-6 mt-3">
+                            <h5 class="text-primary">CV con foto y documentos</h5>
+                            <div id="cv" class="dropzone text-center"></div>
+                        </div>
+                    @endif
+                    @if ($vacante->ced_prof == 1)
+                        <div class="col-12 col-lg-6 mt-3">
+                            <h5 class="text-primary">Titulo y cédula profesional</h5>
+                            <div id="ced_prof" class="dropzone text-center"></div>
+                        </div>
+                    @endif
+                    @if ($vacante->ced_esp == 1)
+                        <div class="col-12 col-lg-6 mt-3">
+                            <h5 class="text-primary">Diploma y cédula de espcialidad</h5>
+                            <div id="ced_esp" class="dropzone text-center"></div>
+                        </div>
+                    @endif
+                    @if ($vacante->doc_migr == 1)
+                        <div class="col-12 col-lg-6 mt-3">
+                            <h5 class="text-primary">Documento migratorio</h5>
+                            <div id="doc_migr" class="dropzone text-center"></div>
+                        </div>
+                    @endif
+                    @if ($vacante->cert_med == 1)
+                        <div class="col-12 col-lg-6 mt-3">
+                            <h5 class="text-primary">Certificado médico (HUP)</h5>
+                            <div id="cert_med" class="dropzone text-center"></div>
+                        </div>
+                    @endif
+                    @if ($vacante->cert_prep == 1)
+                        <div class="col-12 col-lg-6 mt-3">
+                            <h5 class="text-primary">Certificado preparatoria</h5>
+                            <div id="cert_prep" class="dropzone text-center"></div>
+                        </div>
+                    @endif
+                    @if ($vacante->cert_prep_tec == 1)
+                        <div class="col-12 col-lg-6 mt-3">
+                            <h5 class="text-primary">Certificado carrera técnica</h5>
+                            <div id="cert_prep_tec" class="dropzone text-center"></div>
+                        </div>
+                    @endif
+                    @if ($vacante->curp == 1)
+                        <div class="col-12 col-lg-6 mt-3">
+                            <h5 class="text-primary">CURP</h5>
+                            <div id="curp" class="dropzone text-center"></div>
+                        </div>
+                    @endif
+                    @if ($vacante->licencia_manejo == 1)
+                        <div class="col-12 col-lg-6 mt-3">
+                            <h5 class="text-primary">Licencia vigente para conducir</h5>
+                            <div id="licencia_manejo" class="dropzone text-center"></div>
+                        </div>
+                    @endif
+                    @if ($vacante->comprobante_domicilio == 1)
+                        <div class="col-12 col-lg-6 mt-3">
+                            <h5 class="text-primary">Comprobante domicilio</h5>
+                            <div id="comprobante_domicilio" class="dropzone text-center"></div>
+                        </div>
+                    @endif
+                </div>
+                <div class="col-lg-6 offset-3 mt-5">
+                    <button id="btn_postularse" class="btn btn-secondary w-100 text-white">Postularse</button>
+                </div>
+            @else
+                @if (session('resent'))
+                    <div class="alert alert-success" role="alert">
+                        {{ __('A fresh verification link has been sent to your email address.') }}
                     </div>
                 @endif
-                @if ($vacante->ine == 1)
-                    <div class="col-12 col-lg-6 mt-3">
-                        <h5 class="text-primary">Identificación oficial</h5>
-                        <div id="ine" class="dropzone text-center"></div>
-                    </div>
-                @endif
-                @if ($vacante->cv == 1)
-                    <div class="col-12 col-lg-6 mt-3">
-                        <h5 class="text-primary">CV con foto y documentos</h5>
-                        <div id="cv" class="dropzone text-center"></div>
-                    </div>
-                @endif
-                @if ($vacante->ced_prof == 1)
-                    <div class="col-12 col-lg-6 mt-3">
-                        <h5 class="text-primary">Titulo y cédula profesional</h5>
-                        <div id="ced_prof" class="dropzone text-center"></div>
-                    </div>
-                @endif
-                @if ($vacante->ced_esp == 1)
-                    <div class="col-12 col-lg-6 mt-3">
-                        <h5 class="text-primary">Diploma y cédula de espcialidad</h5>
-                        <div id="ced_esp" class="dropzone text-center"></div>
-                    </div>
-                @endif
-                @if ($vacante->doc_migr == 1)
-                    <div class="col-12 col-lg-6 mt-3">
-                        <h5 class="text-primary">Documento migratorio</h5>
-                        <div id="doc_migr" class="dropzone text-center"></div>
-                    </div>
-                @endif
-                @if ($vacante->cert_med == 1)
-                    <div class="col-12 col-lg-6 mt-3">
-                        <h5 class="text-primary">Certificado médico (HUP)</h5>
-                        <div id="cert_med" class="dropzone text-center"></div>
-                    </div>
-                @endif
-                @if ($vacante->cert_prep == 1)
-                    <div class="col-12 col-lg-6 mt-3">
-                        <h5 class="text-primary">Certificado preparatoria</h5>
-                        <div id="cert_prep" class="dropzone text-center"></div>
-                    </div>
-                @endif
-                @if ($vacante->cert_prep_tec == 1)
-                    <div class="col-12 col-lg-6 mt-3">
-                        <h5 class="text-primary">Certificado carrera técnica</h5>
-                        <div id="cert_prep_tec" class="dropzone text-center"></div>
-                    </div>
-                @endif
-                @if ($vacante->curp == 1)
-                    <div class="col-12 col-lg-6 mt-3">
-                        <h5 class="text-primary">CURP</h5>
-                        <div id="curp" class="dropzone text-center"></div>
-                    </div>
-                @endif
-                @if ($vacante->licencia_manejo == 1)
-                    <div class="col-12 col-lg-6 mt-3">
-                        <h5 class="text-primary">Licencia vigente para conducir</h5>
-                        <div id="licencia_manejo" class="dropzone text-center"></div>
-                    </div>
-                @endif
-                @if ($vacante->comprobante_domicilio == 1)
-                    <div class="col-12 col-lg-6 mt-3">
-                        <h5 class="text-primary">Comprobante domicilio</h5>
-                        <div id="comprobante_domicilio" class="dropzone text-center"></div>
-                    </div>
-                @endif
-            </div>
-            <div class="col-lg-6 offset-3 mt-5">
-                <button id="btn_postularse" class="btn btn-secondary w-100 text-white">Postularse</button>
-            </div>
+                <div class="alert alert-info text-center mt-4" role="alert">
+                    {{ __('Before proceeding, please check your email for a verification link.') }}
+                    {{ __('If you did not receive the email') }},
+                    <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
+                        @csrf
+                        <button type="submit" class="btn btn-link p-0 m-0 align-baseline">{{ __('click here to request another') }}</button>.
+                    </form>
+                </div>
+            @endif
+
         @endguest
     </div>
 @endsection
@@ -213,6 +230,38 @@
                         headers: {
                             'X-CSRF-TOKEN' : document.querySelector('meta[name=csrf-token]').content
                         },
+                        accept: function(file, done) {
+                            const dropFiles = file.previewElement.parentNode.childNodes,
+                                alert = document.getElementById('notification_alert');
+                            if(file.type != 'application/pdf'){
+                                if(dropFiles.length === 2)file.previewElement.parentNode.classList.remove('dz-started');
+                                file.previewElement.parentNode.removeChild(file.previewElement);
+                                alert.innerHTML = `
+                                    <div class="alert alert-danger" role="alert">
+                                        Lo sentimos, solo se permiten archivos con formato PDF.
+                                    </div>
+                                `;
+                                setTimeout(function() {
+                                    alert.innerHTML = ``;
+                                }, 3000);
+                            }else{
+                                if(dropFiles.length > 2){
+                                    const id = dropFiles[1].childNodes[1].childNodes[0].getAttribute('id');
+                                    if(id != null){
+                                        axios.post(`/vacantes/deleteFile/${id}`)
+                                        .then(res=>{
+                                            dropFiles[1].parentNode.removeChild(dropFiles[1]);
+                                            done();
+                                        })
+                                    }else{
+                                        dropFiles[1].parentNode.removeChild(dropFiles[1]);
+                                        done();
+                                    }
+                                }else{
+                                    done();
+                                }
+                            }
+                        },
                         init: function(file) {
                             const params = { type: item , id: user_id};
 
@@ -226,7 +275,7 @@
                                         imgPublic.name = data.name;
 
                                         this.options.addedfile.call(this, imgPublic);
-                                        this.options.thumbnail.call(this, imgPublic, `/storage/documents/${user_id}/${data.name}`);
+                                        // this.options.thumbnail.call(this, imgPublic, `/storage/documents/${user_id}/${data.name}`);
 
                                         imgPublic.previewElement.classList.add('dz-success');
                                         imgPublic.previewElement.classList.add('dz-complete');
@@ -239,10 +288,15 @@
                         },
                         removedfile: function(file, resp) {
 
-                            axios.post(`/vacantes/deleteFile/${file.previewElement.childNodes[1].childNodes[0].getAttribute('id')}`)
-                                .then(res=>{
-                                    console.log(res);
-                                })
+                            const id = file.previewElement.childNodes[1].childNodes[0].getAttribute('id');
+                            if(id != null){
+                                axios.post(`/vacantes/deleteFile/${id}`)
+                                    .then(res=>{
+                                        file.previewElement.parentNode.removeChild(file.previewElement);
+                                    })
+                            }else{
+                                file.previewElement.parentNode.removeChild(file.previewElement);
+                            }
 
                         }
                     })

@@ -79,6 +79,9 @@
         <main class="py-4">
             @yield('content')
         </main>
+
+        <div class="notification_alert" id="notification_alert">
+        </div>
     </div>
     @yield('scripts')
 </body>

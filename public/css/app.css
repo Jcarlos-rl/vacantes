@@ -15673,6 +15673,13 @@ nav a:hover {
   color: #45B1E1;
 }
 
+.notification_alert {
+  position: sticky;
+  left: 10px;
+  bottom: 100px;
+  width: 25%;
+}
+
 /**
  * -Estilos geberales
 **/
