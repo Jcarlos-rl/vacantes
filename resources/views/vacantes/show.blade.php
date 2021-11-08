@@ -216,7 +216,8 @@
 
     <script>
         Dropzone.autoDiscover = false;
-        const dropzoneItems = ['acta', 'ine', 'cv', 'ced_prof', 'ced_esp', 'doc_migr', 'cert_med', 'cert_prep', 'cert_prep_tec', 'curp','licencia_manejo', 'comprobante_domicilio'];
+        const dropzoneItems = ['acta', 'ine', 'cv', 'ced_prof', 'ced_esp', 'doc_migr', 'cert_med', 'cert_prep', 'cert_prep_tec', 'curp','licencia_manejo', 'comprobante_domicilio'],
+            alert = document.getElementById('notification_alert');
         document.addEventListener('DOMContentLoaded', () => {
             dropzoneItems.forEach(item => {
                 if(document.getElementById(item) != null){
@@ -231,8 +232,7 @@
                             'X-CSRF-TOKEN' : document.querySelector('meta[name=csrf-token]').content
                         },
                         accept: function(file, done) {
-                            const dropFiles = file.previewElement.parentNode.childNodes,
-                                alert = document.getElementById('notification_alert');
+                            const dropFiles = file.previewElement.parentNode.childNodes;
                             if(file.type != 'application/pdf'){
                                 if(dropFiles.length === 2)file.previewElement.parentNode.classList.remove('dz-started');
                                 file.previewElement.parentNode.removeChild(file.previewElement);
@@ -306,6 +306,37 @@
 
         const btn = document.getElementById('btn_postularse');
         btn.addEventListener('click', ()=>{
+            let band = [],
+                i = 0,
+                success = true;
+
+            dropzoneItems.forEach(item=>{
+                if(document.getElementById(item) != null) band[i++] = (document.getElementById(item).childNodes[1] === undefined) ? 'valio' : '';
+            });
+
+            band.forEach(element => {
+                success &= (element == '') ? true : false
+            })
+
+            if(success){
+                alert.innerHTML = `
+                    <div class="alert alert-success" role="alert">
+                        Felicidades, tu postulación fue realizada.
+                    </div>
+                `;
+                setTimeout(function() {
+                    alert.innerHTML = ``;
+                }, 3000);
+            }else{
+                alert.innerHTML = `
+                    <div class="alert alert-danger" role="alert">
+                        Lo sentimos, debes de adjuntar todos los documentos solicitados.
+                    </div>
+                `;
+                setTimeout(function() {
+                    alert.innerHTML = ``;
+                }, 3000);
+            }
         })
     </script>
 @endsection

@@ -15683,7 +15683,9 @@ nav a:hover {
 /**
  * -Estilos geberales
 **/
-input.form-control {
+input.form-control,
+select.form-control,
+textarea.form-control {
   border: 1px solid #45B1E1;
 }
 

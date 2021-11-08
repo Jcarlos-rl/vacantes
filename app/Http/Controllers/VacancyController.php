@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Vacancy;
+use App\Models\Category;
 use App\Models\Document;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
@@ -16,7 +18,8 @@ class VacancyController extends Controller
      */
     public function index()
     {
-        //
+        $vacantes = Vacancy::all();
+        return view('vacantes.index', compact('vacantes'));
     }
 
     /**
@@ -26,7 +29,8 @@ class VacancyController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::all();
+        return view('vacantes.create', compact('categories'));
     }
 
     /**
@@ -37,7 +41,35 @@ class VacancyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //return $request;
+        $data = $request->validate([
+            'nombre'      => 'required',
+            'categoria'   => 'required',
+            'folio'       => 'required',
+            'descripcion' => 'required'
+        ]);
+
+        Vacancy::create([
+            'name' => $data['nombre'],
+            'category_id' => $data['categoria'],
+            'folio' => $data['folio'],
+            'descripcion' => $data['descripcion'],
+            'slug'  => Str::slug($data['nombre']),
+            'acta'  => (isset($request->acta)) ? true:false,
+            'ine'   => (isset($request->ine)) ? true:false,
+            'cv'  => (isset($request->cv)) ? true:false,
+            'ced_prof'  => (isset($request->ced_prof)) ? true:false,
+            'ced_esp'  => (isset($request->ced_esp)) ? true:false,
+            'doc_migr'  => (isset($request->doc_migr)) ? true:false,
+            'cert_med'  => (isset($request->cert_med)) ? true:false,
+            'cert_prep'  => (isset($request->cert_prep)) ? true:false,
+            'cert_prep_tec'  => (isset($request->cert_prep_tec)) ? true:false,
+            'curp'  => (isset($request->curp)) ? true:false,
+            'licencia_manejo'  => (isset($request->licencia_manejo)) ? true:false,
+            'comprobante_domicilio'  => (isset($request->comprobante_domicilio)) ? true:false,
+        ]);
+
+        return redirect()->action([VacancyController::class, 'index']);
     }
 
     /**
@@ -66,7 +98,7 @@ class VacancyController extends Controller
      */
     public function edit(Vacancy $vacancy)
     {
-        //
+        return 'edit';
     }
 
     /**
