@@ -18,7 +18,7 @@
             <h5 class="text-primary mt-5">Vacantes de <a href="{{ route('category.show', $category->slug) }}" class="text-secondary">{{ $category->name }}</a></h5>
             <div class="row mt-3">
                 @foreach ($category->vacantes as $vacante)
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 mt-3">
                         <div class="container_vacancy">
                             <span class="text-white">BUAP</span>
                             <p class="text-white">{{ $vacante->name }}</p>
