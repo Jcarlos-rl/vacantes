@@ -18,6 +18,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @yield('styles')
 </head>
 <body>
     <div id="app">
@@ -41,9 +42,9 @@
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
-                                {{-- <li class="nav-item">
+                                <li class="nav-item">
                                     <a class="nav-link" href="{{ route('login') }}">Iniciar sesión</a>
-                                </li> --}}
+                                </li>
                             @endif
 
                             @if (Route::has('register'))
@@ -78,6 +79,10 @@
         <main class="py-4">
             @yield('content')
         </main>
+
+        <div class="notification_alert" id="notification_alert">
+        </div>
     </div>
+    @yield('scripts')
 </body>
 </html>

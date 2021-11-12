@@ -4,7 +4,7 @@
 <div class="container">
     <h3 class="text-center text-primary fw-bold">Formulario de registro</h3>
     <p class="text-center fw-light">¿Ya tienes una cuenta? <a class="text-secondary">Iniciar sesión</a></p>
-    <form class="row mt-4 col-lg-10 offset-lg-1 register-form" method="POST" action="{{ route('register') }}">
+    <form class="row mt-4 col-lg-10 offset-lg-1" method="POST" action="{{ route('register') }}">
         @csrf
         <div class="col-lg-6 mb-3">
             <label for="name" class="form-label text-primary">Nombre(s)</label>
@@ -60,8 +60,8 @@
             <label for="password_confirmation" class="form-label text-primary">Confirmar contraseña</label>
             <input id="password_confirmation" type="password" class="form-control form-control-lg" name="password_confirmation" autocomplete="new-password">
         </div>
-        <div class="col-lg-12 text-center mt-5">
-            <button type="submit" class="btn btn-secondary btn-lg text-white">Registrarse</button>
+        <div class="col-lg-12 text-center mt-3">
+            <button type="submit" class="btn btn-primary btn-lg text-white">Registrarse</button>
         </div>
     </form>
 </div>

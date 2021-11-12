@@ -1,6 +1,9 @@
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
+/*---- ----- ----- -----    Bootstrap icons    ----- ----- ----- ----*/
+@import '~bootstrap-icons/font/bootstrap-icons';
+
 // Variables
 @import 'variables';
 
@@ -14,6 +17,12 @@
 
 
 /**
- * -Estilos page auth/register.blade.php
+ * -Estilos geberales
 **/
-@import 'auth/register';
+@import 'general';
+
+/**
+ * -Estilos pagina welcome
+**/
+
+@import 'welcome';
