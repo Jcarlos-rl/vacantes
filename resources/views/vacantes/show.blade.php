@@ -27,6 +27,7 @@
         <div class="d-flex justify-content-between align-items-center">
             <h1 class="text-primary">{{$vacante->name}}</h1>
             <p class="text-primary">Folio: <span class="text-secondary">{{$vacante->folio}}</span></p>
+            <input type="hidden" id="vacante_id" value="{{$vacante->id}}">
         </div>
         <p class="text-secondary">{{ $vacante->category->name }}</p>
         <h4 class="text-primary mt-5">Descripción:</h4>
@@ -196,7 +197,14 @@
                                 He leído la información proporcionada correspondiente al <a href="" class="text-secondary">aviso de privacidad</a>.
                             </label>
                         </div>
-                        <button id="btn_postularse" class="btn btn-secondary w-100 text-white">Postularse</button>
+                        @if ($postulant)
+                            <div class="alert alert-info col-lg-12 my-3" id="btn_message" role="alert">
+                                Tienes una postulación activa, no puedes postularte a más de una vacante.
+                            </div>
+                        @endif
+                        @if (!$postulant)
+                            <button id="btn_postularse" class="btn btn-secondary w-100 text-white">Postularse</button>
+                        @endif
                     </div>
                 </div>
             @else
@@ -328,19 +336,21 @@
 
             if(success){
                 if(document.getElementById('aviso_privacidad').checked){
-                    const params = {id: user_id};
+                    const params = {id: user_id, vacante_id: document.getElementById('vacante_id').value};
 
                     axios.post('/vacantes/subscribe', params)
                     .then(res=>{
-                        console.log(res)
-                        /* alert.innerHTML = `
-                            <div class="alert alert-success" role="alert">
-                                Felicidades, tu postulación fue realizada.
-                            </div>
-                        `;
-                        setTimeout(function() {
-                            alert.innerHTML = ``;
-                        }, 3000); */
+                        if(res.data.data){
+                            alert.innerHTML = `
+                                <div class="alert alert-success" role="alert">
+                                    Felicidades, tu postulación fue realizada.
+                                </div>
+                            `;
+                            setTimeout(function() {
+                                alert.innerHTML = ``;
+                                location.reload();
+                            }, 3000);
+                        }
                     })
                     .catch((error) => {
                         console.log(error)
