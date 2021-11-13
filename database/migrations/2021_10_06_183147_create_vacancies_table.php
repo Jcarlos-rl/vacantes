@@ -31,6 +31,8 @@ class CreateVacanciesTable extends Migration
             $table->boolean('curp')->default(0);
             $table->boolean('licencia_manejo')->default(0);
             $table->boolean('comprobante_domicilio')->default(0);
+            $table->boolean('disponible')->default(1);
+            $table->boolean('eliminado')->default(0);
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });

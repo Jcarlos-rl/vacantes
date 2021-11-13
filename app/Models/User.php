@@ -48,4 +48,10 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Document::class);
     }
+
+    //Relación de 1:1
+    public function postulant()
+    {
+        return $this->belongsTo(Postulant::class);
+    }
 }

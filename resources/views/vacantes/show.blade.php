@@ -189,7 +189,15 @@
                     @endif
                 </div>
                 <div class="col-lg-6 offset-3 mt-5">
-                    <button id="btn_postularse" class="btn btn-secondary w-100 text-white">Postularse</button>
+                    <div class="row">
+                        <div class="col-lg-12 text-center my-3">
+                            <input class="form-check-input" type="checkbox" id="aviso_privacidad">
+                            <label class="form-check-label text-primary" for="acta">
+                                He leído la información proporcionada correspondiente al <a href="" class="text-secondary">aviso de privacidad</a>.
+                            </label>
+                        </div>
+                        <button id="btn_postularse" class="btn btn-secondary w-100 text-white">Postularse</button>
+                    </div>
                 </div>
             @else
                 @if (session('resent'))
@@ -217,11 +225,11 @@
     <script>
         Dropzone.autoDiscover = false;
         const dropzoneItems = ['acta', 'ine', 'cv', 'ced_prof', 'ced_esp', 'doc_migr', 'cert_med', 'cert_prep', 'cert_prep_tec', 'curp','licencia_manejo', 'comprobante_domicilio'],
-            alert = document.getElementById('notification_alert');
+            alert = document.getElementById('notification_alert'),
+            user_id = document.getElementById('id_user').value;
         document.addEventListener('DOMContentLoaded', () => {
             dropzoneItems.forEach(item => {
                 if(document.getElementById(item) != null){
-                    const user_id = document.getElementById('id_user').value;
                     new Dropzone(`#${item}`, {
                         url: `/vacantes/files`,
                         dictDefaultMessage: `Cagar documentos`,
@@ -319,14 +327,34 @@
             })
 
             if(success){
-                alert.innerHTML = `
-                    <div class="alert alert-success" role="alert">
-                        Felicidades, tu postulación fue realizada.
-                    </div>
-                `;
-                setTimeout(function() {
-                    alert.innerHTML = ``;
-                }, 3000);
+                if(document.getElementById('aviso_privacidad').checked){
+                    const params = {id: user_id};
+
+                    axios.post('/vacantes/subscribe', params)
+                    .then(res=>{
+                        console.log(res)
+                        /* alert.innerHTML = `
+                            <div class="alert alert-success" role="alert">
+                                Felicidades, tu postulación fue realizada.
+                            </div>
+                        `;
+                        setTimeout(function() {
+                            alert.innerHTML = ``;
+                        }, 3000); */
+                    })
+                    .catch((error) => {
+                        console.log(error)
+                    })
+                }else{
+                    alert.innerHTML = `
+                        <div class="alert alert-danger" role="alert">
+                            Lo sentimos, no ha leido el aviso de privacidad.
+                        </div>
+                    `;
+                    setTimeout(function() {
+                        alert.innerHTML = ``;
+                    }, 3000);
+                }
             }else{
                 alert.innerHTML = `
                     <div class="alert alert-danger" role="alert">

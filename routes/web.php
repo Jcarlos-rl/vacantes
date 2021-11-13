@@ -32,6 +32,7 @@ Route::get ('/vacantes/{slug}',                [VacancyController::class, 'show'
 Route::post('/vacantes',                       [VacancyController::class, 'store'])->name('vacante.store');
 Route::post('/vacantes/files',                 [VacancyController::class, 'files']);
 Route::post('/vacantes/getFiles',              [VacancyController::class, 'getFileUser']);
+Route::post('/vacantes/subscribe',             [VacancyController::class, 'subscribeVacancy']);
 Route::post('/vacantes/deleteFile/{document}', [VacancyController::class, 'deleteFile']);
 
 Route::get ('/categorias/{slug}',              [CategoryController::class, 'show'])->name('category.show');

@@ -34,4 +34,10 @@ class Vacancy extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    //Relación de 1:n
+    public function postulants()
+    {
+        return $this->hasMany(Postulant::class);
+    }
 }

@@ -160,4 +160,8 @@ class VacancyController extends Controller
 
         return response('Documento Eliminado', 200);
     }
+
+    public function subscribeVacancy(Request $request){
+        return $request;
+    }
 }
