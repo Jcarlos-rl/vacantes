@@ -39,3 +39,4 @@ Route::post('/vacantes/deleteFile/{document}', [VacancyController::class, 'delet
 Route::get('/categorias/{slug}',               [CategoryController::class, 'show'])->name('category.show');
 
 Route::get('/perfil',                          [HomeController::class, 'profile'])->name('user.profile');
+Route::get('/postulacion',                     [HomeController::class, 'postulant'])->name('user.postulant');

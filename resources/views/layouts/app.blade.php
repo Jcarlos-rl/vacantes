@@ -64,8 +64,8 @@
                                         Perfil
                                     </a>
 
-                                    <a class="dropdown-item" href="{{ route('home') }}">
-                                        Postulaciones
+                                    <a class="dropdown-item" href="{{ route('user.postulant') }}">
+                                        Postulación
                                     </a>
 
                                     <a class="dropdown-item" href="{{ route('logout') }}"
