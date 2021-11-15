@@ -15710,3 +15710,16 @@ a {
   padding: 20px 30px;
   border-radius: 5px;
 }
+
+/**
+ * -Estilos pagina perfil
+**/
+.edit_profile #content_password,
+.edit_profile #content_confirmation,
+.edit_profile #content_buttons,
+.edit_profile #change_password {
+  display: none;
+}
+.edit_profile #change_password:hover {
+  cursor: pointer;
+}

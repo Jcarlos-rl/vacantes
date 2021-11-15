@@ -4,6 +4,7 @@ use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VacancyController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,4 +36,6 @@ Route::post('/vacantes/getFiles',              [VacancyController::class, 'getFi
 Route::post('/vacantes/subscribe',             [VacancyController::class, 'subscribeVacancy']);
 Route::post('/vacantes/deleteFile/{document}', [VacancyController::class, 'deleteFile']);
 
-Route::get ('/categorias/{slug}',              [CategoryController::class, 'show'])->name('category.show');
+Route::get('/categorias/{slug}',               [CategoryController::class, 'show'])->name('category.show');
+
+Route::get('/perfil',                          [HomeController::class, 'profile'])->name('user.profile');

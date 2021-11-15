@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Postulant;
 
 class HomeController extends Controller
 {
@@ -21,8 +22,11 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+
+    public function profile()
     {
-        return view('home');
+        $user = auth()->user();
+        $postulant =  Postulant::where('user_id', auth()->user()->id)->first();
+        return view('user.profile', compact('user', 'postulant'));
     }
 }

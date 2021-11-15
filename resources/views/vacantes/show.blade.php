@@ -119,72 +119,96 @@
                     @if ($vacante->acta == 1)
                         <div class="col-12 col-lg-6 mt-3">
                             <h5 class="text-primary">Acta de nacimiento</h5>
+                            <div class="d-flex justify-content-end" id="content_acta">
+                            </div>
                             <div id="acta" class="dropzone text-center"></div>
                         </div>
                     @endif
                     @if ($vacante->ine == 1)
                         <div class="col-12 col-lg-6 mt-3">
                             <h5 class="text-primary">Identificación oficial</h5>
+                            <div class="d-flex justify-content-end" id="content_ine">
+                            </div>
                             <div id="ine" class="dropzone text-center"></div>
                         </div>
                     @endif
                     @if ($vacante->cv == 1)
                         <div class="col-12 col-lg-6 mt-3">
                             <h5 class="text-primary">CV con foto y documentos</h5>
+                            <div class="d-flex justify-content-end" id="content_cv">
+                            </div>
                             <div id="cv" class="dropzone text-center"></div>
                         </div>
                     @endif
                     @if ($vacante->ced_prof == 1)
                         <div class="col-12 col-lg-6 mt-3">
                             <h5 class="text-primary">Titulo y cédula profesional</h5>
+                            <div class="d-flex justify-content-end" id="content_ced_prof">
+                            </div>
                             <div id="ced_prof" class="dropzone text-center"></div>
                         </div>
                     @endif
                     @if ($vacante->ced_esp == 1)
                         <div class="col-12 col-lg-6 mt-3">
                             <h5 class="text-primary">Diploma y cédula de espcialidad</h5>
+                            <div class="d-flex justify-content-end" id="content_ced_esp">
+                            </div>
                             <div id="ced_esp" class="dropzone text-center"></div>
                         </div>
                     @endif
                     @if ($vacante->doc_migr == 1)
                         <div class="col-12 col-lg-6 mt-3">
                             <h5 class="text-primary">Documento migratorio</h5>
+                            <div class="d-flex justify-content-end" id="content_doc_migr">
+                            </div>
                             <div id="doc_migr" class="dropzone text-center"></div>
                         </div>
                     @endif
                     @if ($vacante->cert_med == 1)
                         <div class="col-12 col-lg-6 mt-3">
                             <h5 class="text-primary">Certificado médico (HUP)</h5>
+                            <div class="d-flex justify-content-end" id="content_cert_med">
+                            </div>
                             <div id="cert_med" class="dropzone text-center"></div>
                         </div>
                     @endif
                     @if ($vacante->cert_prep == 1)
                         <div class="col-12 col-lg-6 mt-3">
                             <h5 class="text-primary">Certificado preparatoria</h5>
+                            <div class="d-flex justify-content-end" id="content_cert_prep">
+                            </div>
                             <div id="cert_prep" class="dropzone text-center"></div>
                         </div>
                     @endif
                     @if ($vacante->cert_prep_tec == 1)
                         <div class="col-12 col-lg-6 mt-3">
                             <h5 class="text-primary">Certificado carrera técnica</h5>
+                            <div class="d-flex justify-content-end" id="content_cert_prep_tec">
+                            </div>
                             <div id="cert_prep_tec" class="dropzone text-center"></div>
                         </div>
                     @endif
                     @if ($vacante->curp == 1)
                         <div class="col-12 col-lg-6 mt-3">
                             <h5 class="text-primary">CURP</h5>
+                            <div class="d-flex justify-content-end" id="content_curp">
+                            </div>
                             <div id="curp" class="dropzone text-center"></div>
                         </div>
                     @endif
                     @if ($vacante->licencia_manejo == 1)
                         <div class="col-12 col-lg-6 mt-3">
                             <h5 class="text-primary">Licencia vigente para conducir</h5>
+                            <div class="d-flex justify-content-end" id="content_licencia_manejo">
+                            </div>
                             <div id="licencia_manejo" class="dropzone text-center"></div>
                         </div>
                     @endif
                     @if ($vacante->comprobante_domicilio == 1)
                         <div class="col-12 col-lg-6 mt-3">
                             <h5 class="text-primary">Comprobante domicilio</h5>
+                            <div class="d-flex justify-content-end" id="content_comprobante_domicilio">
+                            </div>
                             <div id="comprobante_domicilio" class="dropzone text-center"></div>
                         </div>
                     @endif
@@ -235,13 +259,15 @@
         const dropzoneItems = ['acta', 'ine', 'cv', 'ced_prof', 'ced_esp', 'doc_migr', 'cert_med', 'cert_prep', 'cert_prep_tec', 'curp','licencia_manejo', 'comprobante_domicilio'],
             alert = document.getElementById('notification_alert'),
             user_id = document.getElementById('id_user').value;
+
+        let band = (document.getElementById('btn_postularse') === null ) ? false : true;
         document.addEventListener('DOMContentLoaded', () => {
             dropzoneItems.forEach(item => {
                 if(document.getElementById(item) != null){
                     new Dropzone(`#${item}`, {
                         url: `/vacantes/files`,
                         dictDefaultMessage: `Cagar documentos`,
-                        addRemoveLinks: true,
+                        addRemoveLinks: band,
                         dictRemoveFile: 'Eliminar archivo',
                         params: { 'type' : item },
                         headers: {
@@ -249,33 +275,45 @@
                         },
                         accept: function(file, done) {
                             const dropFiles = file.previewElement.parentNode.childNodes;
-                            if(file.type != 'application/pdf'){
-                                if(dropFiles.length === 2)file.previewElement.parentNode.classList.remove('dz-started');
+                            if(band){
+                                if(file.type != 'application/pdf'){
+                                    if(dropFiles.length === 2)file.previewElement.parentNode.classList.remove('dz-started');
+                                    file.previewElement.parentNode.removeChild(file.previewElement);
+                                    alert.innerHTML = `
+                                        <div class="alert alert-danger" role="alert">
+                                            Lo sentimos, solo se permiten archivos con formato PDF.
+                                        </div>
+                                    `;
+                                    setTimeout(function() {
+                                        alert.innerHTML = ``;
+                                    }, 3000);
+                                }else{
+                                    if(dropFiles.length > 2){
+                                        const id = dropFiles[1].childNodes[1].childNodes[0].getAttribute('id');
+                                        if(id != null){
+                                            axios.post(`/vacantes/deleteFile/${id}`)
+                                            .then(res=>{
+                                                dropFiles[1].parentNode.removeChild(dropFiles[1]);
+                                                done();
+                                            })
+                                        }else{
+                                            dropFiles[1].parentNode.removeChild(dropFiles[1]);
+                                            done();
+                                        }
+                                    }else{
+                                        done();
+                                    }
+                                }
+                            }else{
                                 file.previewElement.parentNode.removeChild(file.previewElement);
                                 alert.innerHTML = `
-                                    <div class="alert alert-danger" role="alert">
-                                        Lo sentimos, solo se permiten archivos con formato PDF.
+                                    <div class="alert alert-warning" role="alert">
+                                        Lo sentimos, tienes una postulación activa y no puedes realizar cambios en tu documentación.
                                     </div>
                                 `;
                                 setTimeout(function() {
                                     alert.innerHTML = ``;
                                 }, 3000);
-                            }else{
-                                if(dropFiles.length > 2){
-                                    const id = dropFiles[1].childNodes[1].childNodes[0].getAttribute('id');
-                                    if(id != null){
-                                        axios.post(`/vacantes/deleteFile/${id}`)
-                                        .then(res=>{
-                                            dropFiles[1].parentNode.removeChild(dropFiles[1]);
-                                            done();
-                                        })
-                                    }else{
-                                        dropFiles[1].parentNode.removeChild(dropFiles[1]);
-                                        done();
-                                    }
-                                }else{
-                                    done();
-                                }
                             }
                         },
                         init: function(file) {
@@ -291,16 +329,23 @@
                                         imgPublic.name = data.name;
 
                                         this.options.addedfile.call(this, imgPublic);
-                                        // this.options.thumbnail.call(this, imgPublic, `/storage/documents/${user_id}/${data.name}`);
 
                                         imgPublic.previewElement.classList.add('dz-success');
                                         imgPublic.previewElement.classList.add('dz-complete');
                                         imgPublic.previewElement.childNodes[1].childNodes[0].setAttribute('id', data.id);
+
+                                        document.getElementById(`content_${item}`).innerHTML = `
+                                            <a class="text-secondary" target="_blank" href="/storage/documents/${user_id}/${data.name}">Ver documento</a>
+                                        `;
                                     }
                                 })
                         },
                         success: function(file, resp) {
                             file.previewElement.childNodes[1].childNodes[0].setAttribute('id', resp.data.id);
+
+                            document.getElementById(`content_${item}`).innerHTML = `
+                                <a class="text-secondary" target="_blank" href="/storage/documents/${user_id}/${resp.data.name}">Ver documento</a>
+                            `;
                         },
                         removedfile: function(file, resp) {
 
@@ -309,8 +354,10 @@
                                 axios.post(`/vacantes/deleteFile/${id}`)
                                     .then(res=>{
                                         file.previewElement.parentNode.removeChild(file.previewElement);
+                                        document.getElementById(`content_${item}`).innerHTML = '';
                                     })
                             }else{
+                                document.getElementById(`content_${item}`).innerHTML = '';
                                 file.previewElement.parentNode.removeChild(file.previewElement);
                             }
 

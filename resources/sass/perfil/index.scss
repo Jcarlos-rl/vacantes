@@ -1,0 +1,13 @@
+.edit_profile{
+    #content_password,
+    #content_confirmation,
+    #content_buttons,
+    #change_password
+    {
+        display: none;
+    }
+
+    #change_password:hover{
+        cursor: pointer;
+    }
+}
