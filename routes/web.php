@@ -42,3 +42,19 @@ Route::get('/categorias/{slug}',                           [CategoryController::
 
 Route::get('/perfil',                                      [HomeController::class, 'profile'])->name('user.profile');
 Route::get('/postulacion',                                 [HomeController::class, 'postulant'])->name('user.postulant');
+
+Route::post('/postulacion',                                [HomeController::class, 'postulantUpdate']);
+
+
+Route::get('test', function () {
+
+    $user = [
+        'name' => 'Harsukh Makwana',
+        'info' => 'Laravel & Python Devloper'
+    ];
+
+    \Mail::to('harsukh21@gmail.org')->send(new App\Mail\AcceptMail($user));
+
+    dd("success");
+
+});

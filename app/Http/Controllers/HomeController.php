@@ -43,4 +43,20 @@ class HomeController extends Controller
 
         return view('user.postulant', compact('user', 'postulant', 'vacancy'));
     }
+
+    public function postulantUpdate(Request $request)
+    {
+        $postulant = Postulant::find($request->id);
+
+        if($request->status){
+            $postulant->level = $request->level+1;
+            $postulant->save();
+        }else{
+            $postulant->status = false;
+            $postulant->save();
+        }
+
+        return $postulant;
+
+    }
 }

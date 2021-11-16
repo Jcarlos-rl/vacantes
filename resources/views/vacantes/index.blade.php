@@ -37,7 +37,15 @@
                             {{ $vacante->descripcion }}
                         </td>
                         <td class="text-center">
-                            <p class="text-secondary mb-0">{{ count($vacante->postulants) }}</p>
+                            @php
+                                $activos = $rechazados = 0;
+
+                                foreach ($vacante->postulants as $postulant) {
+                                    if($postulant->status == 0) $rechazados++;
+                                    if($postulant->status == 1) $activos++;
+                                }
+                            @endphp
+                            <p class="mb-0"><span class="text-secondary">{{ $activos }}</span> <span class="text-red">{{ $rechazados }}</span></p>
                             <a href="{{ route('vacante.postulants', $vacante->slug) }}">Ver postulantes</a>
                         </td>
                     </tr>
