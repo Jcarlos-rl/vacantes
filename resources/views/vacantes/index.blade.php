@@ -9,30 +9,36 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Folio</th>
-                    <th scope="col">Categoria</th>
-                    <th scope="col">Descripción</th>
-                    <th scope="col"></th>
+                    <th class="text-center text-secondary" scope="col">Nombre</th>
+                    <th class="text-center text-secondary" scope="col">Folio</th>
+                    <th class="text-center text-secondary" scope="col">Categoria</th>
+                    <th class="text-center text-secondary" scope="col">Estatus</th>
+                    <th class="text-center text-secondary" scope="col">Descripción</th>
+                    <th class="text-center text-secondary" scope="col">Postulantes</th>
+                    <th class="text-center text-secondary" scope="col"></th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($vacantes as $vacante)
                     <tr>
-                        <td>
+                        <td class="text-center">
                             {{ $vacante->name }}
                         </td>
-                        <td>
+                        <td class="text-center">
                             {{ $vacante->folio }}
                         </td>
-                        <td>
+                        <td class="text-center">
                             {{ $vacante->category->name }}
                         </td>
-                        <td style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;">
+                        <td class="text-center">
+                            {{ ($vacante->status == 1) ? 'Disponible' : 'No disponible' }}
+                        </td>
+                        <td class="text-center" style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;">
                             {{ $vacante->descripcion }}
                         </td>
-                        <td>
-
+                        <td class="text-center">
+                            <p class="text-secondary mb-0">{{ count($vacante->postulants) }}</p>
+                            <a href="{{ route('vacante.postulants', $vacante->slug) }}">Ver postulantes</a>
                         </td>
                     </tr>
                 @endforeach

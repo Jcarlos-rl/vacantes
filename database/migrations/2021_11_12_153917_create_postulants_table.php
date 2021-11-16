@@ -15,6 +15,8 @@ class CreatePostulantsTable extends Migration
     {
         Schema::create('postulants', function (Blueprint $table) {
             $table->id();
+            $table->boolean('status')->default(1);
+            $table->integer('level')->default(0);
             $table->foreignId('vacancy_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();

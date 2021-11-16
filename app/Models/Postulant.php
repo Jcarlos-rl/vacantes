@@ -13,4 +13,10 @@ class Postulant extends Model
         'vacancy_id',
         'user_id'
     ];
+
+    //Relación de 1:1
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

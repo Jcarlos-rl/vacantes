@@ -61,19 +61,19 @@
             @if ($vacante->ced_esp == 1)
                 <div class="col-auto">
                     <i class="bi bi-file-earmark-pdf d-flex justify-content-center"></i>
-                        <p class="text-primary mt-2">Diploma y cédula de espcialidad</p>
+                    <p class="text-primary mt-2">Diploma y cédula de espcialidad</p>
                 </div>
             @endif
             @if ($vacante->doc_migr == 1)
                 <div class="col-auto">
                     <i class="bi bi-file-earmark-pdf d-flex justify-content-center"></i>
-                        <p class="text-primary mt-2">Documento migratorio</p>
+                    <p class="text-primary mt-2">Documento migratorio</p>
                 </div>
             @endif
             @if ($vacante->cert_med == 1)
                 <div class="col-auto">
                     <i class="bi bi-file-earmark-pdf d-flex justify-content-center"></i>
-                        <p class="text-primary mt-2">Certificado médico (HUP)</p>
+                    <p class="text-primary mt-2">Certificado médico (HUP)</p>
                 </div>
             @endif
             @if ($vacante->cert_prep == 1)
@@ -97,7 +97,7 @@
             @if ($vacante->licencia_manejo == 1)
                 <div class="col-auto">
                     <i class="bi bi-file-earmark-pdf d-flex justify-content-center"></i>
-                        <p class="text-primary mt-2">Licencia vigente para conducir</p>
+                    <p class="text-primary mt-2">Licencia vigente para conducir</p>
                 </div>
             @endif
             @if ($vacante->comprobante_domicilio == 1)

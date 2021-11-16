@@ -33,6 +33,7 @@ class CreateVacanciesTable extends Migration
             $table->boolean('comprobante_domicilio')->default(0);
             $table->boolean('disponible')->default(1);
             $table->boolean('eliminado')->default(0);
+            $table->boolean('status')->default(1);
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
