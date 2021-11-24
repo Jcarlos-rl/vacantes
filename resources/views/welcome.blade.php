@@ -15,18 +15,28 @@
             </a>
         @endforeach
         @foreach ($categories as $category)
-            <h5 class="text-primary mt-5">Vacantes de <a href="{{ route('category.show', $category->slug) }}" class="text-secondary">{{ $category->name }}</a></h5>
-            <div class="row mt-3">
-                @foreach ($category->vacantes as $vacante)
-                    <div class="col-lg-6 mt-3">
-                        <div class="container_vacancy">
-                            <span class="text-white">BUAP</span>
-                            <p class="text-white">{{ $vacante->name }}</p>
-                            <a href="{{ route('vacante.show', $vacante->slug) }}" class="btn btn-secondary text-white">Aplicar</a>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
+            @php
+                $band = 0;
+                foreach ($category->vacantes as $vacante) {
+                    if($vacante->status) $band++;
+                }
+            @endphp
+            @if ($band)
+                <h5 class="text-primary mt-5">Vacantes de <a href="{{ route('category.show', $category->slug) }}" class="text-secondary">{{ $category->name }}</a></h5>
+                <div class="row mt-3">
+                    @foreach ($category->vacantes as $vacante)
+                        @if ($vacante->status)
+                            <div class="col-lg-6 mt-3">
+                                <div class="container_vacancy">
+                                    <span class="text-white">BUAP</span>
+                                    <p class="text-white">{{ $vacante->name }}</p>
+                                    <a href="{{ route('vacante.show', $vacante->slug) }}" class="btn btn-secondary text-white">Aplicar</a>
+                                </div>
+                            </div>
+                        @endif
+                    @endforeach
+                </div>
+            @endif
         @endforeach
     </div>
 @endsection

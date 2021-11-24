@@ -37,24 +37,14 @@ Route::post('/vacantes/files',                             [VacancyController::c
 Route::post('/vacantes/getFiles',                          [VacancyController::class, 'getFileUser']);
 Route::post('/vacantes/subscribe',                         [VacancyController::class, 'subscribeVacancy']);
 Route::post('/vacantes/deleteFile/{document}',             [VacancyController::class, 'deleteFile']);
+Route::post('/vacantes/disabled',                          [VacancyController::class, 'disable']);
 
 Route::get('/categorias/{slug}',                           [CategoryController::class, 'show'])->name('category.show');
+Route::get('/categorias',                                  [CategoryController::class, 'index'])->name('category.index');
+Route::get('/categorias/crear',                            [CategoryController::class, 'create'])->name('category.create');
 
 Route::get('/perfil',                                      [HomeController::class, 'profile'])->name('user.profile');
 Route::get('/postulacion',                                 [HomeController::class, 'postulant'])->name('user.postulant');
 
 Route::post('/postulacion',                                [HomeController::class, 'postulantUpdate']);
 
-
-Route::get('test', function () {
-
-    $user = [
-        'name' => 'Harsukh Makwana',
-        'info' => 'Laravel & Python Devloper'
-    ];
-
-    \Mail::to('harsukh21@gmail.org')->send(new App\Mail\AcceptMail($user));
-
-    dd("success");
-
-});

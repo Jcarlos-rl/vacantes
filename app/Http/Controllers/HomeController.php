@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use App\Models\Postulant;
 use App\Models\Vacancy;
+use App\Mail\AcceptMail;
 
 class HomeController extends Controller
 {
@@ -48,13 +50,24 @@ class HomeController extends Controller
     {
         $postulant = Postulant::find($request->id);
 
+        $data = [
+            'vacancy' => $postulant->vacancy->name,
+            'name'    => $postulant->user->name
+        ];
+
         if($request->status){
             $postulant->level = $request->level+1;
             $postulant->save();
+            $data['text'] = 'Felicidades!, pasaste a la siguente etapa. A la brevedad te mandaremos la información para tu examen de conocimientos.';
         }else{
             $postulant->status = false;
             $postulant->save();
+
+            $data['text'] = 'Lo sentimos, pero hubo problemas con tu documentación adjunta. Por esta razón se te rechazo la postulación.';
+
         }
+
+        Mail::to($postulant->user->email)->send(new AcceptMail($data));
 
         return $postulant;
 

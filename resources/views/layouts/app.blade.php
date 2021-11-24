@@ -68,6 +68,14 @@
                                         Postulación
                                     </a>
 
+                                    <a class="dropdown-item" href="{{ route('vacante.index') }}">
+                                        Vacantes
+                                    </a>
+
+                                    <a class="dropdown-item" href="{{ route('category.index') }}">
+                                        Categorias
+                                    </a>
+
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

@@ -19,4 +19,10 @@ class Postulant extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    //Relación de 1:1
+    public function vacancy()
+    {
+        return $this->belongsTo(Vacancy::class);
+    }
 }

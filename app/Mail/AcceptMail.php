@@ -11,16 +11,16 @@ class AcceptMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $user;
+    public $data;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($user)
+    public function __construct($data)
     {
-        $this->user = $user;
+        $this->data = $data;
     }
 
     /**
@@ -30,7 +30,7 @@ class AcceptMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Test email')
+        return $this->subject('Vacantes BUAP')
                     ->view('email.accept');
     }
 }

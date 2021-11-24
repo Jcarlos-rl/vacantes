@@ -91,7 +91,7 @@ class VacancyController extends Controller
         if($vacante == null){
             return abort(404);
         }else{
-            return view('vacantes.show', compact('vacante', 'postulant'));
+            return ($vacante->status) ? view('vacantes.show', compact('vacante', 'postulant')) : abort(404) ;
         }
 
     }
@@ -185,5 +185,20 @@ class VacancyController extends Controller
         $vacante = Vacancy::where('slug', $slug)->first();
 
         return view('vacantes.postulants', compact('vacante'));
+    }
+
+    public function disable(Request $request)
+    {
+        $vacante = Vacancy::where('id', $request->id)->first();
+
+        if($request->status){
+            $vacante->status = false;
+            $vacante->save();
+        }else{
+            $vacante->status = true;
+            $vacante->save();
+        }
+
+        return $vacante;
     }
 }

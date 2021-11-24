@@ -26,7 +26,7 @@
     <div class="container">
         <div class="d-flex justify-content-between aling-items-center my-3">
             <h4 class="text-primary">Mis datos</h4>
-            @if (!$postulant)
+            @if ($postulant->status == 0)
                 <button type="button" class="btn btn-secondary btn-lg text-white" id="btn_edit">Editar</button>
             @endif
         </div>

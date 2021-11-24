@@ -221,12 +221,11 @@
                                 He leído la información proporcionada correspondiente al <a href="" class="text-secondary">aviso de privacidad</a>.
                             </label>
                         </div>
-                        @if ($postulant)
+                        @if ($postulant->status == 1)
                             <div class="alert alert-info col-lg-12 my-3" id="btn_message" role="alert">
                                 Tienes una postulación activa, no puedes postularte a más de una vacante.
                             </div>
-                        @endif
-                        @if (!$postulant)
+                        @else
                             <button id="btn_postularse" class="btn btn-secondary w-100 text-white">Postularse</button>
                         @endif
                     </div>
